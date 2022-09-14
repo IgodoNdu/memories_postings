@@ -17,6 +17,18 @@ export const getPosts = async (req, res) => {
 }
 
 //function for the post creation route logic
-export const createPost = (req, res) => {
-    res.send('Post Creation');
+export const createPost = async (req, res) => {
+    //for a post request, get the submitted/posted data
+    const post = req.body;
+    //create a new post with received inflow
+    const newPost = new PostMessage(post);
+
+    try {
+        // save to DB
+        await newPost.save();
+        res.status(201).json(newPost)
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+
 }
