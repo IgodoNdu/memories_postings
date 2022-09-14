@@ -4,3 +4,8 @@
 export const getPosts = (req, res) => {
     res.send('DOES THIS WORK!');
 }
+
+//function for the post creation route logic
+export const createPost = (req, res) => {
+    res.send('Post Creation');
+}
