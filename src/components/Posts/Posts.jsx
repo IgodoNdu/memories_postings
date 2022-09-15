@@ -2,7 +2,7 @@ import React from 'react';
 //We'll be using the post component to build posts
 import Post from './Post/Post';
 //import styles
-import useStyles from './styles';
+import useStyles from './postStyles';
 
 const Posts = () => {
   const classes = useStyles();
