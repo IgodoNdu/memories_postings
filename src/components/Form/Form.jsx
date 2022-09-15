@@ -50,19 +50,23 @@ const Form = ({ currentId, setCurrentId }) => {
         //dispatch the createPost action with all the data from the form:our state:postData
         dispatch(createPost(postData));
     }
+    //call clear form after we edit post or create a new post
+    clear();
     
   }
 
   //handle form clear/reset
   const clear = () => {
-
+    setCurrentId(null);
+    setPostData({creator: '', title: '', message: '', tags: '', selectedFile: '' });
   }
 
   return (
     //creating our form with material-ui
     <Paper className={classes.paper}>
       <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-      <Typography variant='h6'>Creating a Memory</Typography>
+        {/** Flip heading title with respect to when creating a new post or updating one */}
+      <Typography variant='h6'>{currentId ? 'Editing' : 'Creating' } a Memory</Typography>
       {/**Who's creting the post. We change the value of this specific state field using the onChange */}
       <TextField name='creator' variant='outlined' label='Creator' fullWidth value={postData.creator} onChange={(e) => setPostData({ ...postData, creator: e.target.value })} />
       <TextField name='title' variant='outlined' label='title' fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
