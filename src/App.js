@@ -7,10 +7,22 @@ import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
 //import styles
 import useStyles from './styles';
+//Time to dispatch an action to the reducer(s)
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+//for creating the action to be dispatched via dispatch()
+import getPosts from './actions/posts'
 
 
 function App() {
   const classes = useStyles();
+  //define our dispatch
+  const dispatch = useDispatch();
+  //a way to dispatch the action (useEffect)
+  useEffect(() => {
+    dispatch(getPosts());
+  }, []);
+
   return (
     //using material-ui
     <Container maxwidth="lg">
