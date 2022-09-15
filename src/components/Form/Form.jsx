@@ -12,6 +12,9 @@ import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
 //import the action to be dispatched from the actions file 
 import { createPost, updatePost } from '../../actions/posts';
+//fetching the data of the post to be updated (so as to populate the update form fields with it)
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react'; //used to populate values of the update form
 
 //Updating a post: Get the ID of the specific/current post of interest (All the way from App.js, could use redux for an efficient handling of this scenario)
 const Form = ({ currentId, setCurrentId }) => {
@@ -22,8 +25,19 @@ const Form = ({ currentId, setCurrentId }) => {
     creator: '', title: '', message: '', tags: '', selectedFile: ''
   });
 
+  //for updating a post: fetch the data of the post to be updated, and populate the form fields with it
+  //tenary: if we have a currentId, loop over state.posts, find() the post (as 'p') with same ID as the 'currentId'. If not the case (i.e no currentId, return null)
+  const post = useSelector((state) => currentId ? state.posts.find((p) => p._id == currentId) : null);
+
   //dispatching the create action
   const dispatch = useDispatch();
+
+  //using useEffect to update the fields of the update form with the post's details. Takes two params (the call back function, and the dependency array)
+  //the dependency array (i.e when the call back function should run (when what changes?)): in this case, when the post value changes from nothing to the actual post
+  useEffect(() => {
+    //if post exist, then set postData to the post(i.e post to be edited data).
+    if(post) setPostData(post);
+  }, [post])
 
   //handling submission (Where we'll dispatch the action). We'll send a post request with the data ffrom the user
   const handleSubmit = (e) => {
