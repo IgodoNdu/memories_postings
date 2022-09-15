@@ -14,7 +14,7 @@ export const getPosts = () => async (dispatch) => {
     }
 }
 
-//the create post action with the post
+//the create post action with the post (data)
 export const createPost = (post) => async (dispatch) => {
     try {
         //get the data from the response: (a post api request to our backend server)
@@ -23,5 +23,17 @@ export const createPost = (post) => async (dispatch) => {
         dispatch({ type: 'CREATE_POST', payload: data });
     } catch (error) {
         console.log(error);
+    }
+}
+
+// create the update post action creator with the post's id and the post (updated post data)
+export const updatePost = (id, post) => async (dispatch) => {
+    try {
+        //make api request to update the post, destructure the response to immediately get the data
+        const { data } = await api.updatePost(id, post); //this will return the updated memory of the post
+        //dispatch the appropriate action with the appropriate data
+        dispatch({ type: 'UPDATE_POST', payload: data });
+    } catch (error) {
+        console.log(error.message);
     }
 }
