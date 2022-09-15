@@ -42,7 +42,8 @@ export const updatePost = async (req, res) => {
     //check if _id is a mongoose object id
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id');
     //update the post if the _id is valid (from the model:PostMessage). Specify new=true, so we can receive the updated version of that post
-    const updatedPost = await PostMessage.findByIdAndUpdate(_id, post, { new: true });
+    //the new updated post object should spread the new data received, plus the Id (every post needs its id). Hence spread then add: i.e {...post, _id}
+    const updatedPost = await PostMessage.findByIdAndUpdate(_id, { ...post, _id }, { new: true });
     //send the updated post
     res.json(updatedPost);
 }
