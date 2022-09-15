@@ -8,6 +8,10 @@ import { useState } from 'react';
 import useStyles from './formStyles';
 //converting image file to text
 import FileBase from 'react-file-base64';
+//dispatching the create post action
+import { useDispatch } from 'react-redux';
+//import the action to be dispatched from the actions file 
+import { createPost } from '../../actions/posts';
 
 
 const Form = () => {
@@ -18,8 +22,15 @@ const Form = () => {
     creator: '', title: '', message: '', tags: '', selectedFile: ''
   });
 
-  //handling submission
-  const handleSubmit = () => {
+  //dispatching the create action
+  const dispatch = useDispatch();
+
+  //handling submission (Where we'll dispatch the action). We'll send a post request with the data ffrom the user
+  const handleSubmit = (e) => {
+    //prevent the default refresh action
+    e.preventDefault();
+    //dispatch the createPost action with all the data from the form:our state:postData
+    dispatch(createPost(postData));
 
   }
 
