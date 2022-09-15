@@ -20,13 +20,14 @@ function App() {
   const classes = useStyles();
   //define our dispatch
   const dispatch = useDispatch();
-  //a way to dispatch the action (useEffect)
-  useEffect(() => {
-    dispatch(getPosts());
-  }, []);
 
   //Keeping track of the current post's id (for post edit purpose)
   const [currentId, setCurrentId] = useState(null); //set the id to null at the start (i.e if there's no post/id selected)
+
+  //a way to dispatch the action (useEffect), the dependency array describes values whoose change in value will cause the call back function to run
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [currentId, dispatch]);
 
   return (
     //using material-ui
