@@ -11,7 +11,7 @@ import useStyles from './styles';
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 //for creating the action to be dispatched via dispatch()
-import getPosts from './actions/posts'
+import { getPosts } from './actions/posts'
 
 
 function App() {
