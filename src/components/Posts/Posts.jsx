@@ -1,4 +1,6 @@
 import React from 'react';
+//styling with material-ui
+import { Grid, CircularProgress } from '@material-ui/core';
 //We'll be using the post component to build posts
 import Post from './Post/Post';
 //import styles
@@ -15,10 +17,17 @@ const Posts = () => {
   console.log(posts); // for now
 
   return (
-    <div>
-      <h1>Posts</h1>
-      <Post />
-    </div>
+    //IF NO POSTS
+    !posts.length ? <CircularProgress /> : (
+      <Grid className={classes.container} container alignItems='stretch' spacing={3}>
+        {/**Loop over the posts */}
+        {posts.map((post) => (
+          <Grid key={post._id} item xs={12} sm={6}>
+            <Post post={post} />
+          </Grid>
+        ))}
+      </Grid>
+    )
   )
 }
 
