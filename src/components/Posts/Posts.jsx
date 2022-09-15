@@ -8,7 +8,8 @@ import useStyles from './postStyles';
 //for fetching the data from the global redux store
 import { useSelector } from 'react-redux';
 
-const Posts = () => {
+//Receiving the current post id as prop (for post update purpose). Inefficient approach, use redux instead
+const Posts = ({ setCurrentId }) => {
   //for styling
   const classes = useStyles();
   
@@ -23,7 +24,8 @@ const Posts = () => {
         {/**Loop over the posts */}
         {posts.map((post) => (
           <Grid key={post._id} item xs={12} sm={6}>
-            <Post post={post} />
+            {/**passing the setCurrentId prop to post component (for post update purpose). Use redux instead of this props drilling approach */}
+            <Post post={post} setCurrentId={setCurrentId} />
           </Grid>
         ))}
       </Grid>
