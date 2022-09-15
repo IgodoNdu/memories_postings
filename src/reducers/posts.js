@@ -2,7 +2,7 @@
 export default (posts = [], action) => {
     switch (action.type) {
         case 'FETCH_ALL_POST':
-            return posts; //for now
+            return action.payload; //for now
         case 'CREATE_POST':
             return posts; //for now
         default:
