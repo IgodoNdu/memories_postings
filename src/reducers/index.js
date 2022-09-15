@@ -1,3 +1,4 @@
+//Here we'll combine all the possible reducers we'll be needing for this project. This makes for cleaner code base
 import { combineReducers } from "redux";
 import posts from './posts';
 
