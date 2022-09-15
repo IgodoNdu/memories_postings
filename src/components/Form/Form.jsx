@@ -11,10 +11,10 @@ import FileBase from 'react-file-base64';
 //dispatching the create post action
 import { useDispatch } from 'react-redux';
 //import the action to be dispatched from the actions file 
-import { createPost } from '../../actions/posts';
+import { createPost, updatePost } from '../../actions/posts';
 
-
-const Form = () => {
+//Updating a post: Get the ID of the specific/current post of interest (All the way from App.js, could use redux for an efficient handling of this scenario)
+const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
   //setting the postData object of the state
   const [postData, setPostData] = useState({
@@ -29,9 +29,14 @@ const Form = () => {
   const handleSubmit = (e) => {
     //prevent the default refresh action
     e.preventDefault();
-    //dispatch the createPost action with all the data from the form:our state:postData
-    dispatch(createPost(postData));
-
+    //if we're editing/updating a post then the current post's id id passed, i.e there's a currentId prop, hence we dispatch a postUpdate Action instead (with the currentId, & postData as params)
+    if(currentId) {
+      dispatch(updatePost(currentId, postData))
+    } else {
+        //dispatch the createPost action with all the data from the form:our state:postData
+        dispatch(createPost(postData));
+    }
+    
   }
 
   //handle form clear/reset
