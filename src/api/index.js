@@ -5,3 +5,5 @@ import axios from "axios";
 const url = 'http://localhost:5000/posts';
 
 export const fetchPosts = () => axios.get(url);
+//api call for creating a post
+export const createPost = (newPost) => axios.post(url, newPost);
