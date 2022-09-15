@@ -9,7 +9,8 @@ import MoreHorizicon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment/moment';
 
 //Since we're passing the post from the Posts component(parent component) as a prop ({post}: we destructured the props)
-const Post = ({post}) => {
+//passing the currentID seter from Posts as prop (for post update purpose)
+const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
@@ -19,7 +20,8 @@ const Post = ({post}) => {
         <Typography variant='body2'>{moment(post.createdAt).fromNow()}</Typography>
       </div>
       <div className={classes.overlay2}>
-        <Button style={{color: 'white'}} size="small" onClick={() => {}}>
+        {/** Using the current id setter method, to append the post's current id */}
+        <Button style={{color: 'white'}} size="small" onClick={() => setCurrentId(post._id)}>
           <MoreHorizicon fontSize="default" />
         </Button>
       </div>
