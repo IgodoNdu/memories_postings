@@ -8,15 +8,15 @@ import postRoutes from './routes/posts.js';
 //as it's traditional practice with express, initialize the app
 const app = express();
 
-//use express middleware to connect the routes to our application
-//In the first param:set the starting path(prefix) for all the routes inside posts.js, 2nd param: set the route
-app.use('/posts', postRoutes)
-
 //setting up bodyParser to send our requests(post) as needed
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-//for cross origin request
+//for cross origin request. This should be described above the routes middleware to avoid errors due to cors
 app.use(cors());
+
+//use express middleware to connect the routes to our application
+//In the first param:set the starting path(prefix) for all the routes inside posts.js, 2nd param: set the route
+app.use('/posts', postRoutes)
 
 
 //database: https://www.mongodb.com/cloud/atlas (Creating Models for our posts)
