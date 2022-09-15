@@ -12,7 +12,9 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 //for creating the action to be dispatched via dispatch()
 import { getPosts } from './actions/posts'
-
+//editing a post: keeping track of the current post's id that's to be edited.
+//Here's a good place as APP is a parent component that'll share the id of post (to edited) to both the Form & Posts Components as it's needed in these components for some actions/logic (This is props drilling. Use REDUX instead of this approach)
+import { useState } from "react";
 
 function App() {
   const classes = useStyles();
@@ -22,6 +24,9 @@ function App() {
   useEffect(() => {
     dispatch(getPosts());
   }, []);
+
+  //Keeping track of the current post's id (for post edit purpose)
+  const [currentId, setCurrentId] = useState(null); //set the id to null at the start (i.e if there's no post/id selected)
 
   return (
     //using material-ui
@@ -34,10 +39,12 @@ function App() {
         <Container>
           <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
             <Grid item xs={12} sm={7}>
-              <Posts />
+              {/** Also pass the setter method for the current id too (for individual post edit/update purpose) */}
+              <Posts setCurrentId={setCurrentId} />
             </Grid>
             <Grid item xs={12} sm={7}>
-              <Form />
+              {/**Pass the current post's id to the form (for edit/update purpose). Also pass the setter method for the current id too */}
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>
