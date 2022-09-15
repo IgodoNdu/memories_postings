@@ -4,7 +4,7 @@ export default (posts = [], action) => {
         case 'FETCH_ALL_POST':
             return action.payload; //for now
         case 'CREATE_POST':
-            return posts; //for now
+            return [...posts, action.payload]; //spread already existing posts, then add the new post, then return them all
         default:
             return posts;
     }
