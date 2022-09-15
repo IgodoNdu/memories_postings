@@ -34,6 +34,6 @@ export const updatePost = (id, post) => async (dispatch) => {
         //dispatch the appropriate action with the appropriate data
         dispatch({ type: 'UPDATE_POST', payload: data });
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
 }
