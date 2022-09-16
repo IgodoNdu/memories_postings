@@ -47,3 +47,15 @@ export const deletePost = (id) => async (dispatch) => {
         console.log(error);
     }
 }
+
+//Create the like a post action creator
+export const likePost = (id) => async (dispatch) => {
+    try {
+        //make api request to update the post, destructure the response to immediately get the data
+        const { data } = await api.likePost(id);
+        //dispatch the appropriate action with the appropriate data
+        dispatch({ type: 'LIKE_POST', payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+}
