@@ -7,6 +7,9 @@ export default (posts = [], action) => {
         case 'UPDATE_POST':
             //if post._id == action,payload._id, return the updated post, else return the post as it was without any update
             return posts.map((post) => post._id === action.payload._id ? action.payload : post);
+        case 'LIKE_POST':
+            //if post._id == action,payload._id, return the updated post, else return the post as it was without any update
+            return posts.map((post) => post._id === action.payload._id ? action.payload : post);
         case 'FETCH_ALL_POST':
             return action.payload; //for now
         case 'CREATE_POST':
