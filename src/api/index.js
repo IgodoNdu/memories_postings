@@ -11,4 +11,6 @@ export const createPost = (newPost) => axios.post(url, newPost);
 export const updatePost = (id, updatePost) => axios.patch(`${url}/${id}`, updatePost);
 //BackendAPI call for deleting a post
 export const deletePost = (id) => axios.delete(`${url}/${id}`);
+//API call for liking a post
+export const likePost = (id) => axios.patch(`${url}/${id}/likePost`);
 
