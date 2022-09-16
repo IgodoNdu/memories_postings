@@ -7,11 +7,18 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizicon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment/moment';
+//For dispatching the delete a post action
+import { useDispatch } from 'react-redux';
+//import the action to be dispatched
+import { deletePost } from '../../../actions/posts';
 
 //Since we're passing the post from the Posts component(parent component) as a prop ({post}: we destructured the props)
 //passing the currentID seter from Posts as prop (for post update purpose)
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
+  // initialize the delete a post dispatch which will be set on the onClick event of the delete button
+  const dispatch = useDispatch();
+
   return (
     <Card className={classes.card}>
       <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
@@ -38,7 +45,7 @@ const Post = ({ post, setCurrentId }) => {
           Like
           {post.likeCount}
         </Button>
-        <Button size="small" color='primary' onClick={() => {}}>
+        <Button size="small" color='primary' onClick={() => dispatch(deletePost(post._id))}>
           <DeleteIcon fontSize="small" />
           Delete
         </Button>
