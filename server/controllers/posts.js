@@ -59,3 +59,18 @@ export const deletePost = async (req, res) => {
     //send notification on completion
     res.json({ message: 'Post deleted successfully' });
 }
+
+//controller logic for liking a post
+export const likePost = async (req, res) => {
+    //get the id of the post to be liked
+    const { id } = req.params;
+    //check if the ID is valid
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
+    //find the post to be liked
+    const post = await PostMessage.findById(id);
+    //now the updated post (i.e post with it's incremented like count) Remember with update request, specify the 3rd param i.e {new: true}
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, { likeCount: post.likeCount++}, { new: true });
+    //return/send notification
+    res.json(updatedPost);
+
+}
