@@ -37,3 +37,13 @@ export const updatePost = (id, post) => async (dispatch) => {
         console.log(error);
     }
 }
+
+//Create the delete post action creator
+export const deletePost = (id) => async (dispatch) => {
+    try {
+        await api.deletePost(id);
+        dispatch({ type: 'DELETE_POST', payload: id });
+    } catch (error) {
+        console.log(error);
+    }
+}
