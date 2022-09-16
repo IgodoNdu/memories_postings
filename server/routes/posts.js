@@ -2,7 +2,7 @@
 //first import Express
 import express from "express";
 //import the controller(Logic) for the posts router
-import { getPosts, createPost, updatePost, deletePost } from "../controllers/posts.js";
+import { getPosts, createPost, updatePost, deletePost, likePost } from "../controllers/posts.js";
 
 //Set up our router
 const router = express.Router();
@@ -14,6 +14,8 @@ router.post('/', createPost);
 router.patch('/:id', updatePost);
 //routing for deleting a post
 router.delete('/:id', deletePost);
+//routing for liking a post
+router.patch('/:id/likePost', likePost);
 
 //eXPORT THE WHOLE ROUTER
 export default router;
