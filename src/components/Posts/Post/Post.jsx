@@ -10,7 +10,7 @@ import moment from 'moment/moment';
 //For dispatching the delete a post action
 import { useDispatch } from 'react-redux';
 //import the action to be dispatched
-import { deletePost } from '../../../actions/posts';
+import { deletePost, likePost } from '../../../actions/posts';
 
 //Since we're passing the post from the Posts component(parent component) as a prop ({post}: we destructured the props)
 //passing the currentID seter from Posts as prop (for post update purpose)
@@ -40,7 +40,7 @@ const Post = ({ post, setCurrentId }) => {
         <Typography variant='h5' gutterBottom>{post.message}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color='primary' onClick={() => {}}>
+        <Button size="small" color='primary' onClick={() => dispatch(likePost(post._id))}>
           <ThumbUpAltIcon fontSize="small" />
           Like
           {post.likeCount}
